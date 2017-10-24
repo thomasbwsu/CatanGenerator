@@ -8,15 +8,15 @@
     <p id="board">Before the script...</p>
 
     <script>
-    var wood = {resource:"Wood", count:4}
-    var sheep = {resource:"Sheep", count:4}
-    var wheat = {resource:"Wheat", count:4}
-    var stone = {resource:"Stone", count:3}
-    var brick = {resource:"Brick", count:3}
-    var randHex = {resource:"null", count:null}
-    var hexes = [wood, sheep, wheat, stone, brick]
-    var rand
-    var text = ""
+    let wood = {resource:"Wood", count:4}
+    let sheep = {resource:"Sheep", count:4}
+    let wheat = {resource:"Wheat", count:4}
+    let stone = {resource:"Stone", count:3}
+    let brick = {resource:"Brick", count:3}
+    let randHex = {resource:"null", count:null}
+    let hexes = [wood, sheep, wheat, stone, brick]
+    let rand
+    let text = ""
 
     while (!checkResources(hexes)) {
         //return a random # 0-4
@@ -32,7 +32,7 @@
 
     function checkResources(hexes){
         //function returns 'done' for a resource check
-        var done = true
+        let done = true
         hexes.forEach(function(element) {      
             if (element.count > 0){
                 done = false
