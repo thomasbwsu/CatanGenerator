@@ -1,11 +1,39 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <!-- <link rel="stylesheet" type="text/css" href="cw.css"/> -->
+    <link rel="stylesheet" type="text/css" href="main.css"/>
 </head>
 
 <body>
+    <h1>Generated Board Layout<br></h1>
     <p id="board">Before the script...</p>
+
+    <hr>
+    <form>
+
+        <form id="radios">Number of Players:
+            <input type="radio" name="numPlayers" id="p2" onclick="adjustPlayers();" value="2" checked>2
+            <input type="radio" name="numPlayers" id="p3"onclick="adjustPlayers();" value="3">3
+            <input type="radio" name="numPlayers" id="p4"onclick="adjustPlayers();" value="4">4  
+        </form> 
+        
+        <p id="paragraph1">
+        Player 1:
+        <input type="text" name="player1">
+        </p>
+        <p id="paragraph2">
+        Player 2:
+        <input type="text" name="player2">
+        <p id="paragraph3">
+        Player 3:
+        <input type="text" name="player3">
+        </p>
+        <p id="paragraph4">
+        Player 4:
+        <input type="text" name="player4">
+        </p>
+        <button onclick="decideFirstPlayer();">Submit</button>
+    </form>
 
     <script>
     let wood = {resource:"Wood", count:4}
@@ -18,7 +46,10 @@
     let rand
     let text = ""
 
-    while (!checkResources(hexes)) {
+    document.getElementById("paragraph3").style.display="none";
+    document.getElementById("paragraph4").style.display="none";
+
+    while (!checkResourcesDone(hexes)) {
         //return a random # 0-4
         rand = Math.floor(Math.random() * 5)
         randHex = hexes[rand]
@@ -30,8 +61,8 @@
         document.getElementById('board').innerHTML = text.slice(0, text.length-2)
     }
 
-    function checkResources(hexes){
-        //function returns 'done' for a resource check
+    //function returns 'done' status for any remaining resources to assign to the board
+    function checkResourcesDone(hexes){
         let done = true
         hexes.forEach(function(element) {      
             if (element.count > 0){
@@ -42,6 +73,26 @@
         //done = true : all resource counts equal 0
         //done = false : at least 1 resource count > 0
         return done
+    }
+
+    function adjustPlayers(){
+        let selectedPlayers = document.querySelector('input[name = "numPlayers"]:checked').value
+        if (selectedPlayers==2){
+            document.getElementById("paragraph3").style.display="none";
+            document.getElementById("paragraph4").style.display="none";
+        }
+        else if (selectedPlayers==3){
+            document.getElementById("paragraph3").style.display="block"
+            document.getElementById("paragraph4").style.display="none";
+        }
+        else if (selectedPlayers==4){
+            document.getElementById("paragraph3").style.display="block"
+            document.getElementById("paragraph4").style.display="block"
+        }
+    }
+
+    function decideFirstPlayer(){
+
     }
 
     </script>
