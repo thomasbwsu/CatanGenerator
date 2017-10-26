@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="main.css"/> -->
 </head>
 
 <body>
     <h1>Generated Board Layout<br></h1>
-    <p id="board">Before the script...</p>
+    <p id="board"></p>
 
     <hr>
     <form>
@@ -18,22 +18,25 @@
         </form> 
         
         <p id="paragraph1">
-        Player 1:
-        <input type="text" name="player1">
+            Player 1:
+            <input type="text" name="player1">
         </p>
         <p id="paragraph2">
-        Player 2:
-        <input type="text" name="player2">
+            Player 2:
+            <input type="text" name="player2">
         <p id="paragraph3">
-        Player 3:
-        <input type="text" name="player3">
+            Player 3:
+            <input type="text" name="player3">
         </p>
         <p id="paragraph4">
-        Player 4:
-        <input type="text" name="player4">
+            Player 4:
+            <input type="text" name="player4">
         </p>
-        <button onclick="decideFirstPlayer();">Submit</button>
+
+        <button onclick="decideFirstPlayer();">Pick 1st Player</button>
     </form>
+
+    <h1 id="firstPlayer"></h1>
 
     <script>
     let wood = {resource:"Wood", count:4}
@@ -48,6 +51,7 @@
 
     document.getElementById("paragraph3").style.display="none";
     document.getElementById("paragraph4").style.display="none";
+    // document.getElementById("firstPlayer").style.display="none";
 
     while (!checkResourcesDone(hexes)) {
         //return a random # 0-4
@@ -92,7 +96,36 @@
     }
 
     function decideFirstPlayer(){
+        let empty = true
+        let numPlayers = parseInt(document.querySelector('input[name = "numPlayers"]:checked').value)
+        // for (let i=1;i<4;i++){
+        //     if (document.querySelector("'input[name = '\"" + 'player' + numPlayers + '"]\'').value == empty){ //doesn't work
+        //         console.log("empty")
+        //         empty = true
+        //     }
+        // }
+        //try to get the value using document.getelementbynames="player1" instead of using query selector
+        
+        //return a random # 1-4
+        let theFirstPlayer = Math.floor(Math.random() * numPlayers) + 1
+        let text = "Congratulations! The first player is: " 
+        switch (theFirstPlayer){
+            case 1:
+                text += document.querySelector('input[name = "player1"]').value
+                break
+            case 2:
+                text += document.querySelector('input[name = "player2"]').value
+                break
+            case 3:
+                text += document.querySelector('input[name = "player3"]').value
+                break
+            case 4:
+                text += document.querySelector('input[name = "player4"]').value
+                break
+        }
 
+        document.getElementById("firstPlayer").innerHTML = text;
+        document.getElementById("firstPlayer").style.display="block";
     }
 
     </script>
